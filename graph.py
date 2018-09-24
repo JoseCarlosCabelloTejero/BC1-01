@@ -24,7 +24,15 @@ class Grafo:
 
 
     def posicionNodo(self, idNodo):
-        return 0
+        if not self.perteneceNodo(idNodo) == False:
+            attrX=get_node_attributes(self.__graph,"x")
+            attrY=get_node_attributes(self.__graph,"y")
+            """get_node_attributes devuelve un diccionario con
+            las propiedades de cada uno de los nodos del grafo"""
+            return [attrX.get(idNodo),attrY.get(idNodo)]
+        else:
+            return "Error"
+
 
     def adyacentesNodo(self, idNodo):
         return 0
