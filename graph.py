@@ -16,7 +16,11 @@ class Grafo:
 
 
     def perteneceNodo(self, idNodo):
-        return 0
+        listaNodos=list(self.__graph.nodes)
+        for i in listaNodos:
+            if idNodo==i:
+                return True
+        return False
 
 
     def posicionNodo(self, idNodo):
