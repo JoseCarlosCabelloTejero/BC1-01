@@ -6,13 +6,21 @@
 from networkx import *
 
 class Grafo:
-    def __init__(self): #Constructor
+    def __init__(self,path): #Constructor
+        self.__graph = read_graphml(path)
         #read_graphml(path, node_type=<type 'str'>)
 
+# Metodo que devuelve el atributo graph
+    def getGraph(self):
+        return self.__graph
+
+
     def perteneceNodo(self, idNodo):
+        return 0
 
 
     def posicionNodo(self, idNodo):
-
+        return 0
 
     def adyacentesNodo(self, idNodo):
+        return 0
