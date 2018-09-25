@@ -19,5 +19,7 @@ grafo = Grafo("./Datos/data/Anchuras.graphml.xml")
 #print(grafo.posicionNodo('4762868811'))
 
 
-aristas = grafo.adyacentesNodo("4762868811")
-NombresAristas=get_edge_attributes(aristas,"name")
+aristas = grafo.adyacentesNodo("946409156")
+
+for i in aristas:
+    print(i)

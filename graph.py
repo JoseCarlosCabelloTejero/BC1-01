@@ -35,9 +35,11 @@ class Grafo:
 
 
     def adyacentesNodo(self, idNodo):
-
+        lista = []
         if self.perteneceNodo(idNodo) == True:
-            aristas=edges(self.__graph,idNodo)
-            return aristas
+            aristas=self.__graph.edges(idNodo,True,None)
+            for i in aristas:
+                lista.append((i[0],i[1],i[2].get("name"),i[2].get("length")))
+            return lista
         else:
             return "Error"
