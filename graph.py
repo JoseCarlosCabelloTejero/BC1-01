@@ -84,7 +84,10 @@ class Grafo:
         if self.perteneceNodo(idNodo) == True:
             aristas=self.__graph.edges(idNodo,True)
             for i in aristas:
-                lista.append((i[0],i[1],i[2].get("name"),i[2].get("length")))
+                if i[2].get("name") == None:
+                    lista.append((i[0],i[1],"Sin nombre",i[2].get("length")))
+                else:
+                    lista.append((i[0],i[1],i[2].get("name"),i[2].get("length")))
             return lista
         else:
             return "Error"
