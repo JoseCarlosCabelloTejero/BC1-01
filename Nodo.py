@@ -11,7 +11,6 @@ class Nodo:
         #Informacion del nodo
         self.nodoPadre= padre
         self.id=
-        m
 
         #Informacion del dominio
         self.estado= estado
@@ -19,6 +18,7 @@ class Nodo:
         self.accion=
         self.p=padre.getProfundidad() + 1
         self.f=
+
 
 
     def getCosto(self):

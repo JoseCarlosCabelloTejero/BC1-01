@@ -17,17 +17,12 @@ class Estado:
             n=n+1
         return m.hexdigest()
 
-    def __init__(self,nodo,listaNodos):
-        self.node = nodo
-        self.listNodes =sorted(listaNodos)
-        self.idEstado = self.md5metodo(self.node,self.listNodes)
+    def __init__(self):
+        self.node = "4331489739"
+        self.listNodes =["4331489528","4331489668","4331489711","4762868815","4928063625"]
+        self.id = self.md5metodo(self.node,self.listNodes)
 
 
-    def node(self):
-        return self.nodes
 
-    def listNodes(self):
-        return self.listNodes
-        
-    def idEstado(self):
-        return self.idEstado
+    def prueba(self):
+        print(self.id)
