@@ -23,6 +23,7 @@ class Estado:
         self.id = self.md5metodo(self.node,self.listNodes)
 
 
+    def getNode(self):
+        return self.node
 
-    def prueba(self):
-        print(self.id)
+    
