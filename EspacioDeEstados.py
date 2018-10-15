@@ -23,10 +23,12 @@ class EspacioDeEstados:
         listaDeAdyacentes = self.__grafo.adyacentesNodo(estado.getNode())
 
         for ady in listaDeAdyacentes:
-
-            accM = "EStoy en ",estado.getNode(),"y voy a ",ady[1]
+            nombreCalle = ady[2]
+            accM = "EStoy en ",estado.getNode(),"y voy a ",ady[1],",",nombreCalle
             estadoNuevo = #Se crea un estado
             coste = ady[3]
+
+
             listaSucesores.apend([accM,estadoNuevo,coste])
 
         return listaSucesores

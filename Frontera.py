@@ -18,7 +18,7 @@ class Frontera:
         self.listaFrontera=sorted(self.listaFrontera,key=lambda Nodo: Nodo.getF())
 
     def elimina(self):
-
+        
         return self.listaFrontera.pop(0)
 
 
