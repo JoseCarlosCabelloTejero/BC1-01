@@ -14,7 +14,13 @@ class EspacioDeEstados:
 
 
     def esta(self,estado):
-        return self.__grafo.perteneceNodo(estado.getNode())
+        if not (self.__grafo.perteneceNodo(estado.getNode())):
+            return False
+        else:
+            for i in estado.getListNodes():
+                if not(self.__grafo.perteneceNodo(i)):
+                    return False
+        return True
 
     def sucesores(self,estado):
 
@@ -25,10 +31,9 @@ class EspacioDeEstados:
         for ady in listaDeAdyacentes:
             nombreCalle = ady[2]
             accM = "EStoy en ",estado.getNode(),"y voy a ",ady[1],",",nombreCalle
-            estadoNuevo = #Se crea un estado
+            estadoNuevo = Estado(ady[1],estado.getListNodes().remove(ady[1]))
             coste = ady[3]
 
-
-            listaSucesores.apend([accM,estadoNuevo,coste])
+            listaSucesores.append([accM,estadoNuevo,coste])
 
         return listaSucesores

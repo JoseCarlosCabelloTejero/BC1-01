@@ -7,17 +7,17 @@
 
 class Nodo:
 
-    def __init__(self,padre,estado,costo):
+    def __init__(self,padre,estado,costo,f,accion):
         #Informacion del nodo
         self.nodoPadre= padre
-        self.id=
+        
 
         #Informacion del dominio
         self.estado= estado
         self.costo= padre.getCosto() + costo
-        self.accion=
+        self.accion=accion
         self.p=padre.getProfundidad() + 1
-        self.f=
+        self.f=f
 
 
 
