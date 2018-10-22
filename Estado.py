@@ -8,23 +8,55 @@ import hashlib
 
 class Estado:
 
-    def md5metodo(self,id,lista):
+###############################################################################
+#   Nombre del metodo: md5generador
+#   Fecha de creacion: 08/10/2018
+#   Version: 1.0
+#   Argumentos de entrada: id del nodo y la lista de nodos que quedan por recorrer
+#   Valor retornado: Devuelve el id del estado codificado en MD5
+#   Descripcion:   Utilizamos la bilbioteca hashlib para codificar el id del nodo
+#                  Y la lista de nodos que quedan por recorrer en un codigo MD5 que
+#                  sera el identificador del estado.
+################################################################################
+
+    def md5generador(self,idNodo,lista):
         n=0
         m = hashlib.md5()
-        m.update(id.encode())
+        m.update(idNodo.encode())
         for i in lista:
             m.update(lista[n].encode())
             n=n+1
         return m.hexdigest()
 
+
+#Constructor
+
     def __init__(self,node,listNodes):
         self.node = node
         self.listNodes =sorted(listNodes)
-        self.id = self.md5metodo(self.node,self.listNodes)
+        self.id = self.md5generador(self.node,self.listNodes)
 
+###############################################################################
+#   Nombre del metodo: getNode
+#   Fecha de creacion: 08/10/2018
+#   Version: 1.0
+#   Argumentos de entrada:
+#   Valor retornado: Devuelve el id del nodo del estado.
+#   Descripcion:   Metodo getter que devuelve el nodo del estado
+################################################################################
 
     def getNode(self):
         return self.node
+
+###############################################################################
+#   Nombre del metodo: getListNodes
+#   Fecha de creacion: 08/10/2018
+#   Version: 1.0
+#   Argumentos de entrada:
+#   Valor retornado: Devuelve la lista de nodos que quedan por recorrer en ese estado
+#   Descripcion:    Metodo getter que devuelve la lista de nodos que quedan por recorrer
+#                   en un estado.
+################################################################################
 
     def getListNodes(self):
         return self.listNodes
