@@ -10,8 +10,6 @@ class Nodo:
     def __init__(self,padre,estado,costo,f,accion):
         #Informacion del nodo
         self.nodoPadre= padre
-        
-
         #Informacion del dominio
         self.estado= estado
         self.costo= padre.getCosto() + costo
