@@ -30,7 +30,7 @@ class Problema:
 
 ###############################################################################
 #   Nombre del metodo: esObjetivo
-#   Fecha de creacion: 1710/2018
+#   Fecha de creacion: 17/10/2018
 #   Version: 1.0
 #   Argumentos de entrada: Un objeto estado de la clase Estados
 #   Valor retornado: Devuelve un booleano (True) si el estado es objetivo y

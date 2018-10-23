@@ -36,27 +36,13 @@ class Estado:
         self.listNodes =sorted(listNodes)
         self.id = self.md5generador(self.node,self.listNodes)
 
-###############################################################################
-#   Nombre del metodo: getNode
-#   Fecha de creacion: 08/10/2018
-#   Version: 1.0
-#   Argumentos de entrada:
-#   Valor retornado: Devuelve el id del nodo del estado.
-#   Descripcion:   Metodo getter que devuelve el nodo del estado
-################################################################################
 
+
+## Getter del atributo node
     def getNode(self):
         return self.node
 
-###############################################################################
-#   Nombre del metodo: getListNodes
-#   Fecha de creacion: 08/10/2018
-#   Version: 1.0
-#   Argumentos de entrada:
-#   Valor retornado: Devuelve la lista de nodos que quedan por recorrer en ese estado
-#   Descripcion:    Metodo getter que devuelve la lista de nodos que quedan por recorrer
-#                   en un estado.
-################################################################################
 
+## getter del atributo listNodes
     def getListNodes(self):
         return self.listNodes

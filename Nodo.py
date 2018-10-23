@@ -18,13 +18,14 @@ class Nodo:
         self.f=f
 
 
-
+## Getter del atributo costo
     def getCosto(self):
         return self.costo
 
-
+## Getter del atributo profundidad
     def getProfundidad(self):
         return self.p
 
+## Getter del atributo F
     def getF(self):
         return self.f

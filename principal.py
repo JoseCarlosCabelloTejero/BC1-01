@@ -6,8 +6,8 @@
 
 from graph import *
 
-grafo = Grafo("./Datos/data/Anchuras.graphml.xml")
-idNodo="946409139"
+grafo = Grafo("./Datos/data/Abenójar.graphml.xml")
+idNodo="2418492945"
 
 ##### Ejemplo del petodo perteneceNodo
 
