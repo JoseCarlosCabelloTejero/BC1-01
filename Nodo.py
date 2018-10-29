@@ -18,9 +18,9 @@ class Nodo:
 ################################################################################
 
     def definirEstrategia(self,estrategia):
-        if estrategia == 'Anchura':
+        if estrategia == 'anchura':
             f=self.__p
-        elif estrategia == "Costo":
+        elif estrategia == "costo":
             f=self.__costo
         else:
             f=(-1)*self.__p

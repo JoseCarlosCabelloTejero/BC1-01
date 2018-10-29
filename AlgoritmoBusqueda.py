@@ -113,7 +113,7 @@ def crearSolucion(nodo):
 def busqueda_acotada (prob, estrategia, prof_Max):
 
     frontera = Frontera.Frontera()
-    n_inicial = crea_nodo (None, prob.getEstadoInicial, 0, estrategia, None)
+    n_inicial = crea_nodo (None, prob.getEstadoInicial, 0,0, estrategia, None)
     frontera.insertar(n_inicial)
     solucion = None
 
@@ -152,8 +152,16 @@ def Busqueda(prob, estrategia, prof_Max, inc_Prof):
         solucion = busqueda_acotada (prob, estrategia, prof_Actual)
         prof_Actual = prof_Actual + inc_Prof
 
-    escribirSolucion(solucion) #Se escribe la solucion en un archivo .txt
+
     return solucion
+
+    Prof_Max = int (sys.argv[1])
+    Inc_Prof= int(sys.argv[2])
+    Estrategia=(sys.argv[3]).lower()
+
+    Prob = Problema.Problema ("problema.json")
+
+    solucion=Busqueda(Prob, Estrategia, Prof_Max, Inc_Prof)
 
 
 ################################################################################
@@ -173,5 +181,11 @@ if __name__=="__main__":
 
     Prof_Max = int (sys.argv[1])
     Inc_Prof= int(sys.argv[2])
+    Estrategia=(sys.argv[3]).lower()
 
     Prob = Problema.Problema ("problema.json")
+
+    solucion=Busqueda(Prob, Estrategia, Prof_Max, Inc_Prof)
+    #escribirSolucion(solucion) #Se escribe la solucion en un archivo .txt
+
+    print(solucion)

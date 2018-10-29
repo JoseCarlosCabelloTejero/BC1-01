@@ -7,9 +7,6 @@ from Nodo import Nodo
 
 class Frontera:
 
-    def __init__(self):
-        self.listaFrontera=CreaFrontera()
-
 ###############################################################################
 #   Nombre del metodo: crearFrontera
 #   Fecha de creacion: 17/10/2018
@@ -22,6 +19,14 @@ class Frontera:
     def CreaFrontera(self):
         frontera = []
         return frontera
+
+################################################################################
+#                              CONSTRUCTOR                                     #
+################################################################################
+
+    def __init__(self):
+        self.listaFrontera=self.CreaFrontera()
+
 
 ###############################################################################
 #   Nombre del metodo: insertar
