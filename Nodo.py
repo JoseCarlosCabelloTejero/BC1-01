@@ -55,3 +55,6 @@ class Nodo:
 ## Getter del atributo F
     def getF(self):
         return self.f
+
+    def getEstado(self):
+        return self.estado
