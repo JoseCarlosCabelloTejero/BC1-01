@@ -10,7 +10,7 @@ import graph
 class EspacioDeEstados:
 
     def __init__(self,fichero):
-        self.__grafo=Grafo(fichero)
+        self.__grafo=graph.Grafo(fichero)
 
 ###############################################################################
 #   Nombre del metodo: esta

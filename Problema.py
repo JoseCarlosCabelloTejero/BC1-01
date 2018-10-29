@@ -23,7 +23,7 @@ class Problema:
 
 
     def __init__(self,ficheroJson):
-        data=leerJson(ficheroJson)
+        data=self.leerJson(ficheroJson)
         self.__espacioEstados=EspacioDeEstados(data.get('graphlmfile'))
         self.__estadoInicial=Estado(data.get('IntSt').get('node'),
         data.get('IntSt').get('listNodes'))
