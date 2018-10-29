@@ -7,15 +7,41 @@
 
 class Nodo:
 
-    def __init__(self,padre,estado,costo,f,accion):
+###############################################################################
+#   Nombre del metodo: definirEstrategia
+#   Fecha de creacion: 29/10/2018
+#   Version: 1.0
+#   Argumentos de entrada: Una cadena con el nomnre de la estrategia de busqueda
+#   Valor retornado: El valor de la f para la estrategia dada
+#   Descripcion: El metodo calcula el valor de la f dependiendo de la
+#                estrategia de busqueda utilizada
+################################################################################
+
+    def definirEstrategia(self,estrategia):
+        if estrategia = 'Anchura':
+            f=self.p
+        elif estrategia = "Costo":
+            f=self.costo
+        else:
+            f=(-1)*self.p
+
+        return f
+
+    def __init__(self,padre,estado,costo,estrategia,accion):
         #Informacion del nodo
         self.nodoPadre= padre
         #Informacion del dominio
         self.estado= estado
-        self.costo= padre.getCosto() + costo
         self.accion=accion
-        self.p=padre.getProfundidad() + 1
-        self.f=f
+
+        if self.nodoPadre == None:
+            self.costo=0
+            self.p=0
+        else:
+            self.costo= padre.getCosto() + costo
+            self.p=padre.getProfundidad() + 1
+
+        self.f=self.definirEstrategia(estrategia)
 
 
 ## Getter del atributo costo
