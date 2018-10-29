@@ -12,16 +12,51 @@ import sys
 import stack
 
 archivoSolucion="solucion.txt"
+estrategiasBusqueda=["anchura","costo","profundidad","prof_acotada","prof_ite"]
+###############################################################################
+#   Nombre del metodo: escribirSolucion
+#   Fecha de creacion: 29/10/2018
+#   Version: 1.0
+#   Argumentos de entrada:
+#   Valor retornado:
+#   Descripcion:
+#
+#
+################################################################################
 
 def escribirSolucion(solucion):
     with open(archivoSolucion,'w') as f:
         for accion in solucion:
             f.write(accion + "\n")
-			f.close()
+            f.close()
+
+
+###############################################################################
+#   Nombre del metodo: crea_nodo
+#   Fecha de creacion: 29/10/2018
+#   Version: 1.0
+#   Argumentos de entrada:
+#   Valor retornado:
+#   Descripcion:
+#
+#
+################################################################################
 
 def crea_nodo(padre, estado, prof, costo, estrategia,accion):
     nodo=Nodo.Nodo(padre,estado,costo,estrategia,accion)
     return nodo
+
+
+###############################################################################
+#   Nombre del metodo: crearListaNodosArbol
+#   Fecha de creacion: 29/10/2018
+#   Version: 1.0
+#   Argumentos de entrada:
+#   Valor retornado:
+#   Descripcion:
+#
+#
+################################################################################
 
 def crearListaNodosArbol(Ls, padre, prof_Max, estrategia):
     Ln=[]
@@ -32,6 +67,18 @@ def crearListaNodosArbol(Ls, padre, prof_Max, estrategia):
         nodo=Nodo.Nodo(padre, estado, coste, estrategia, accion)
         Ln.append(nodo)
     return Ln
+
+
+###############################################################################
+#   Nombre del metodo: crearSolucion
+#   Fecha de creacion: 29/10/2018
+#   Version: 1.0
+#   Argumentos de entrada:
+#   Valor retornado:
+#   Descripcion:
+#
+#
+################################################################################
 
 def crearSolucion(nodo):
     pila = stack.Stack()
@@ -51,6 +98,18 @@ def crearSolucion(nodo):
 
     return solucion
 
+
+###############################################################################
+#   Nombre del metodo: busqueda_acotada
+#   Fecha de creacion: 29/10/2018
+#   Version: 1.0
+#   Argumentos de entrada:
+#   Valor retornado:
+#   Descripcion:
+#
+#
+################################################################################
+
 def busqueda_acotada (prob, estrategia, prof_Max):
 
     frontera = Frontera.Frontera()
@@ -58,7 +117,7 @@ def busqueda_acotada (prob, estrategia, prof_Max):
     frontera.insertar(n_inicial)
     solucion = None
 
-    while ((solucion==None) and(not (frontera.esVacia())):
+    while ((solucion == None) and (not(frontera.esVacia()))):
         n_actual=frontera.elimina()
         if (prob.esObjetivo(n_actual.getEstado())):
             solucion=True
@@ -71,6 +130,18 @@ def busqueda_acotada (prob, estrategia, prof_Max):
         return "NO_Solucion"
     else:
         return CreaSolucion(n_actual)
+
+
+###############################################################################
+#   Nombre del metodo: Busqueda
+#   Fecha de creacion: 29/10/2018
+#   Version: 1.0
+#   Argumentos de entrada:
+#   Valor retornado:
+#   Descripcion:
+#
+#
+################################################################################
 
 def Busqueda(prob, estrategia, prof_Max, inc_Prof):
 
@@ -85,13 +156,20 @@ def Busqueda(prob, estrategia, prof_Max, inc_Prof):
     return solucion
 
 
+################################################################################
+#                               MAIN                                           #
+################################################################################
 
-if __name__= "__main__":
+if __name__=="__main__":
 
     #Comprobacion de los argumentos de entrada
-    if not len(sys.argv)==3:
-        print('Uso: ./AlgoritmoBusqueda <profMaxima> <incremento>')
+    if not len(sys.argv)==4:
+        print('Uso: ./AlgoritmoBusqueda <profMaxima> <incremento> <estrategia>')
         exit()
+    elif (sys.argv[3].lower()) not in estrategiasBusqueda:
+        print('Error. Estrategia de búsqueda desconocida')
+        print(estrategiasBusqueda)
+
 
     Prof_Max = int (sys.argv[1])
     Inc_Prof= int(sys.argv[2])
