@@ -10,6 +10,19 @@ import Frontera
 import Nodo
 import sys
 
+def crea_nodo(padre, estado, prof, costo, estrategia,accion):
+    nodo=Nodo.Nodo(padre,estado,costo,estrategia,accion)
+    return nodo
+
+def crearListaNodosArbol(Ls, padre, prof_Max, estrategia):
+    Ln=[]
+    for sucesor in Ls:
+        accion=sucesor[0]
+        estado=sucesor[1]
+        coste=sucesor[2]
+        nodo=Nodo.Nodo(padre, estado, coste, estrategia, accion)
+        Ln.append(nodo)
+    return Ln
 
 def busqueda_acotada (prob, estrategia, prof_Max):
 
@@ -18,9 +31,19 @@ def busqueda_acotada (prob, estrategia, prof_Max):
     frontera.insertar(n_inicial)
     solucion = None
 
-def crea_nodo(padre, estado, prof, costo, estrategia,accion):
-    nodo=Nodo.Nodo(padre,estado,costo,estrategia,accion)
-    return nodo
+    while ((solucion==None) and(not (frontera.esVacia())):
+        n_actual=frontera.elimina()
+        if (prob.esObjetivo(n_actual.getEstado())):
+            solucion=True
+        else:
+            Ls=prob.getEspacioEstados().sucesores(n_actual.getEstado())
+            Ln=crearListaNodosArbol(Ls, n_actual, prof_Max, estrategia)
+            frontera.insertarLista(Ln)
+
+    if (solucion==None):
+        return "NO_Solucion"
+    else:
+        return CreaSolucion(n_actual)
 
 def Busqueda(prob, estrategia, prof_Max, inc_Prof):
 
@@ -32,10 +55,6 @@ def Busqueda(prob, estrategia, prof_Max, inc_Prof):
         prof_Actual = prof_Actual + inc_Prof
 
     return solucion
-
-
-
-
 
 if __name__= "__main__":
 
