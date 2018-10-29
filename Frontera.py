@@ -39,6 +39,10 @@ class Frontera:
         self.listaFrontera.append(nodoArbol)
         self.listaFrontera=sorted(self.listaFrontera,key=lambda Nodo: Nodo.getF())
 
+    def insertarLista(self, Ln):
+        for nodo in Ln:
+            insertar(nodo)
+
 ###############################################################################
 #   Nombre del metodo: elimina
 #   Fecha de creacion: 17/10/2018
@@ -60,7 +64,7 @@ class Frontera:
 #   Argumentos de entrada:
 #   Valor retornado: Devuelve un booleano (True) si la frontera esta vacia.
 #   Descripcion:   Metodo encargado de devolver si la frontera esta o no vacia.
-#                  si esta vacia devovlera True y si no devolvera False. 
+#                  si esta vacia devovlera True y si no devolvera False.
 ################################################################################
 
     def esVacia(self):
