@@ -11,6 +11,14 @@ import Nodo
 import sys
 import stack
 
+archivoSolucion="solucion.txt"
+
+def escribirSolucion(solucion):
+    with open(archivoSolucion,'w') as f:
+        for accion in solucion:
+            f.write(accion + "\n")
+			f.close()
+
 def crea_nodo(padre, estado, prof, costo, estrategia,accion):
     nodo=Nodo.Nodo(padre,estado,costo,estrategia,accion)
     return nodo
@@ -40,7 +48,7 @@ def crearSolucion(nodo):
 
     while pila.isEmpty():
         solucion.append(pila.pop())
-        
+
     return solucion
 
 def busqueda_acotada (prob, estrategia, prof_Max):
@@ -73,7 +81,10 @@ def Busqueda(prob, estrategia, prof_Max, inc_Prof):
         solucion = busqueda_acotada (prob, estrategia, prof_Actual)
         prof_Actual = prof_Actual + inc_Prof
 
+    escribirSolucion(solucion) #Se escribe la solucion en un archivo .txt
     return solucion
+
+
 
 if __name__= "__main__":
 
