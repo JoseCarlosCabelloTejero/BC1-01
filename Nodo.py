@@ -19,42 +19,48 @@ class Nodo:
 
     def definirEstrategia(self,estrategia):
         if estrategia = 'Anchura':
-            f=self.p
+            f=self.__p
         elif estrategia = "Costo":
-            f=self.costo
+            f=self.__costo
         else:
-            f=(-1)*self.p
+            f=(-1)*self.__p
 
         return f
 
     def __init__(self,padre,estado,costo,estrategia,accion):
         #Informacion del nodo
-        self.nodoPadre= padre
+        self.__nodoPadre= padre
         #Informacion del dominio
-        self.estado= estado
-        self.accion=accion
+        self.__estado= estado
+        self.__accion=accion
 
-        if self.nodoPadre == None:
-            self.costo=0
-            self.p=0
+        if self.__nodoPadre == None:
+            self.__costo=0
+            self.__p=0
         else:
-            self.costo= padre.getCosto() + costo
-            self.p=padre.getProfundidad() + 1
+            self.__costo= padre.getCosto() + costo
+            self.__p=padre.getProfundidad() + 1
 
-        self.f=self.definirEstrategia(estrategia)
+        self.__f=self.definirEstrategia(estrategia)
 
 
 ## Getter del atributo costo
     def getCosto(self):
-        return self.costo
+        return self.__costo
 
 ## Getter del atributo profundidad
     def getProfundidad(self):
-        return self.p
+        return self.__p
 
 ## Getter del atributo F
     def getF(self):
-        return self.f
+        return self.__f
 
     def getEstado(self):
-        return self.estado
+        return self.__estado
+
+    def getPadre(self):
+        return self.__nodoPadre
+
+    def getAccion(self):
+        return self.__accion
