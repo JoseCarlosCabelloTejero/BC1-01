@@ -9,6 +9,7 @@ import Problema
 import Frontera
 import Nodo
 import sys
+import stack
 
 def crea_nodo(padre, estado, prof, costo, estrategia,accion):
     nodo=Nodo.Nodo(padre,estado,costo,estrategia,accion)
@@ -23,6 +24,24 @@ def crearListaNodosArbol(Ls, padre, prof_Max, estrategia):
         nodo=Nodo.Nodo(padre, estado, coste, estrategia, accion)
         Ln.append(nodo)
     return Ln
+
+def crearSolucion(nodo):
+    pila = stack.Stack()
+
+    nodoArbol = nodo
+
+    while (not nodoArbol.getPadre()==None):
+        accion = nodo.getAccion()
+        pila.push(accion)
+        nodoArbol = nodoArbol.getPadre
+    pila.push(nodoArbol)
+
+    solucion = []
+
+    while pila.isEmpty():
+        solucion.append(pila.pop())
+        
+    return solucion
 
 def busqueda_acotada (prob, estrategia, prof_Max):
 
