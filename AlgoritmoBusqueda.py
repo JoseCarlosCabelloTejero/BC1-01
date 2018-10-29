@@ -113,19 +113,21 @@ def crearSolucion(nodo):
 def busqueda_acotada (prob, estrategia, prof_Max):
 
     frontera = Frontera.Frontera()
-    n_inicial = crea_nodo (None, prob.getEstadoInicial, 0,0, estrategia, None)
+    estado_inicial = prob.getEstadoInicial()
+    n_inicial = crea_nodo (None, estado_inicial, 0,0, estrategia, None)
     frontera.insertar(n_inicial)
     solucion = None
 
     while ((solucion == None) and (not(frontera.esVacia()))):
         n_actual=frontera.elimina()
-        if (prob.esObjetivo(n_actual.getEstado())):
+        estadoActual = n_actual.getEstado()
+        if prob.esObjetivo(estadoActual):
             solucion=True
         else:
             Ls=prob.getEspacioEstados().sucesores(n_actual.getEstado())
             Ln=crearListaNodosArbol(Ls, n_actual, prof_Max, estrategia)
             frontera.insertarLista(Ln)
-
+            print(Ln,Ls)
     if (solucion==None):
         return "NO_Solucion"
     else:

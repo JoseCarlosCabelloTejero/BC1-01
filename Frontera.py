@@ -25,7 +25,7 @@ class Frontera:
 ################################################################################
 
     def __init__(self):
-        self.listaFrontera=self.CreaFrontera()
+        self.__listaFrontera=self.CreaFrontera()
 
 
 ###############################################################################
@@ -41,12 +41,12 @@ class Frontera:
 ################################################################################
 
     def insertar(self,nodoArbol):
-        self.listaFrontera.append(nodoArbol)
-        self.listaFrontera=sorted(self.listaFrontera,key=lambda Nodo: Nodo.getF())
+        self.__listaFrontera.append(nodoArbol)
+        self.__listaFrontera=sorted(self.__listaFrontera,key=lambda Nodo: Nodo.getF())
 
     def insertarLista(self, Ln):
         for nodo in Ln:
-            insertar(nodo)
+            self.insertar(nodo)
 
 ###############################################################################
 #   Nombre del metodo: elimina
@@ -60,7 +60,7 @@ class Frontera:
 ################################################################################
 
     def elimina(self):
-        return self.listaFrontera.pop(0)
+        return self.__listaFrontera.pop(0)
 
 ###############################################################################
 #   Nombre del metodo: esVacia
@@ -73,4 +73,4 @@ class Frontera:
 ################################################################################
 
     def esVacia(self):
-        return self.listaFrontera == []
+        return self.__listaFrontera == []

@@ -4,6 +4,7 @@
 ##    Grupo: BC1 - 01                       Curso: 2018 / 2019             ##
 #############################################################################
 
+import Estado
 
 class Nodo:
 
@@ -38,7 +39,7 @@ class Nodo:
             self.__costo=0
             self.__p=0
         else:
-            self.__costo= padre.getCosto() + costo
+            self.__costo= padre.getCosto() + float(costo)
             self.__p=padre.getProfundidad() + 1
 
         self.__f=self.definirEstrategia(estrategia)

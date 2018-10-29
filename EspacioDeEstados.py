@@ -6,6 +6,7 @@
 
 import graph
 
+from Estado import *
 
 class EspacioDeEstados:
 
@@ -60,7 +61,11 @@ class EspacioDeEstados:
         for ady in listaDeAdyacentes:
             nombreCalle = ady[2]
             accM = "Estoy en ",estado.getNode(),"y voy a ",ady[1],",",nombreCalle
-            estadoNuevo = Estado(ady[1],estado.getListNodes().remove(ady[1]))
+            listaNodosNueva = estado.getListNodes()
+            for i in estado.getListNodes():
+                if i == ady[1]:
+                    listaNodosNueva.remove(ady[1])
+            estadoNuevo = Estado(ady[1],listaNodosNueva)
             coste = ady[3]
 
             listaSucesores.append([accM,estadoNuevo,coste])

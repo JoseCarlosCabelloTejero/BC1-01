@@ -28,21 +28,18 @@ class Estado:
             n=n+1
         return m.hexdigest()
 
-
 #Constructor
 
     def __init__(self,node,listNodes):
-        self.node = node
-        self.listNodes =sorted(listNodes)
-        self.id = self.md5generador(self.node,self.listNodes)
-
-
+        self.__node = node
+        self.__listNodes = sorted(listNodes)
+        self.__id = self.md5generador(self.__node,self.__listNodes)
 
 ## Getter del atributo node
     def getNode(self):
-        return self.node
+        return self.__node
 
-
-## getter del atributo listNodes
     def getListNodes(self):
-        return self.listNodes
+        return self.__listNodes
+
+##

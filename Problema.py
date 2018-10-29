@@ -42,12 +42,12 @@ class Problema:
 ################################################################################
 
 
-    def esObjetivo(self,estado):
-        return (estado.getListNodes()==[])
-
-
     def getEstadoInicial(self):
         return self.__estadoInicial
 
     def getEspacioEstados(self):
         return self.__espacioEstados
+
+    def esObjetivo(self,estado):
+        
+        return estado.getListNodes() == []
