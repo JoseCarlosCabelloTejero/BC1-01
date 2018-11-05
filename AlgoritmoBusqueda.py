@@ -27,8 +27,9 @@ estrategiasBusqueda=["anchura","costo","profundidad","prof_acotada","prof_ite"]
 def escribirSolucion(solucion):
     with open(archivoSolucion,'w') as f:
         for accion in solucion:
-            f.write(accion + "\n")
-            f.close()
+            f.write(accion)
+            f.write("\n")
+        f.close()
 
 
 ###############################################################################
@@ -86,18 +87,37 @@ def crearSolucion(nodo):
     nodoArbol = nodo
 
     while (not nodoArbol.getPadre()==None):
-        accion = nodo.getAccion()
+        accion = nodoArbol.getAccion()
         pila.push(accion)
-        nodoArbol = nodoArbol.getPadre
-    pila.push(nodoArbol)
+        nodoArbol = nodoArbol.getPadre()
+
 
     solucion = []
 
-    while pila.isEmpty():
+    while not pila.isEmpty():
         solucion.append(pila.pop())
 
     return solucion
 
+
+def poda(diccionarioPoda, Ln):
+
+    ListaNodosPoda = []
+
+    for nodo in Ln:
+        estadoNodo = nodo.getEstado()
+        idEstado = estadoNodo.getId()
+        F_estado = nodo.getF()
+
+        if( idEstado in diccionarioPoda):
+            if F_estado < int(diccionarioPoda.get(idEstado)):
+                diccionarioPoda.update({idEstado:F_estado})
+                ListaNodosPoda.append(nodo)
+        else:
+            diccionarioPoda.update({idEstado:F_estado})
+            ListaNodosPoda.append(nodo)
+
+    return ListaNodosPoda,diccionarioPoda
 
 ###############################################################################
 #   Nombre del metodo: busqueda_acotada
@@ -111,6 +131,8 @@ def crearSolucion(nodo):
 ################################################################################
 
 def busqueda_acotada (prob, estrategia, prof_Max):
+
+    diccionarioPoda = {}
 
     frontera = Frontera.Frontera()
     estado_inicial = prob.getEstadoInicial()
@@ -126,12 +148,13 @@ def busqueda_acotada (prob, estrategia, prof_Max):
         else:
             Ls=prob.getEspacioEstados().sucesores(n_actual.getEstado())
             Ln=crearListaNodosArbol(Ls, n_actual, prof_Max, estrategia)
-            frontera.insertarLista(Ln)
-            print(Ln,Ls)
+            ListaNodosPoda,diccionarioPoda = poda(diccionarioPoda, Ln)
+            frontera.insertarLista(ListaNodosPoda)
+
     if (solucion==None):
         return "NO_Solucion"
     else:
-        return CreaSolucion(n_actual)
+        return crearSolucion(n_actual)
 
 
 ###############################################################################
@@ -157,14 +180,6 @@ def Busqueda(prob, estrategia, prof_Max, inc_Prof):
 
     return solucion
 
-    Prof_Max = int (sys.argv[1])
-    Inc_Prof= int(sys.argv[2])
-    Estrategia=(sys.argv[3]).lower()
-
-    Prob = Problema.Problema ("problema.json")
-
-    solucion=Busqueda(Prob, Estrategia, Prof_Max, Inc_Prof)
-
 
 ################################################################################
 #                               MAIN                                           #
@@ -188,6 +203,6 @@ if __name__=="__main__":
     Prob = Problema.Problema ("problema.json")
 
     solucion=Busqueda(Prob, Estrategia, Prof_Max, Inc_Prof)
-    #escribirSolucion(solucion) #Se escribe la solucion en un archivo .txt
+    escribirSolucion(solucion) #Se escribe la solucion en un archivo .txt
 
-    print(solucion)
+    print("Algoritmo finalizado...")
