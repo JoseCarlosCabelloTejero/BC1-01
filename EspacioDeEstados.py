@@ -60,7 +60,7 @@ class EspacioDeEstados:
 
         for ady in listaDeAdyacentes:
             nombreCalle = ady[2]
-            accM = "Estoy en ",estado.getNode(),"y voy a ",ady[1],",",nombreCalle
+            accM = 'Estoy en {} y voy a {}, {}'.format(estado.getNode(),ady[1],nombreCalle)
             listaNodosNueva = estado.getListNodes()
             for i in estado.getListNodes():
                 if i == ady[1]:
