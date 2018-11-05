@@ -24,11 +24,14 @@ estrategiasBusqueda=["anchura","costo","profundidad","prof_acotada","prof_ite"]
 #
 ################################################################################
 
-def escribirSolucion(solucion):
+def escribirSolucion(solucion,n_final):
     with open(archivoSolucion,'w') as f:
         for accion in solucion:
             f.write(accion)
             f.write("\n")
+        cadena = '\nCoste total: {}. \nLista nodos por recorrer {}\n'.format(
+                 n_final.getCosto(),n_final.getEstado().getListNodes())
+        f.write(cadena)
         f.close()
 
 
@@ -154,7 +157,7 @@ def busqueda_acotada (prob, estrategia, prof_Max):
     if (solucion==None):
         return "NO_Solucion"
     else:
-        return crearSolucion(n_actual)
+        return crearSolucion(n_actual),n_actual
 
 
 ###############################################################################
@@ -174,11 +177,11 @@ def Busqueda(prob, estrategia, prof_Max, inc_Prof):
     solucion = None
 
     while ((solucion == None) and (prof_Actual<= prof_Max)):
-        solucion = busqueda_acotada (prob, estrategia, prof_Actual)
+        solucion,n_final = busqueda_acotada (prob, estrategia, prof_Actual)
         prof_Actual = prof_Actual + inc_Prof
 
 
-    return solucion
+    return solucion,n_final
 
 
 ################################################################################
@@ -194,6 +197,7 @@ if __name__=="__main__":
     elif (sys.argv[3].lower()) not in estrategiasBusqueda:
         print('Error. Estrategia de búsqueda desconocida')
         print(estrategiasBusqueda)
+        exit()
 
 
     Prof_Max = int (sys.argv[1])
@@ -202,7 +206,7 @@ if __name__=="__main__":
 
     Prob = Problema.Problema ("problema.json")
 
-    solucion=Busqueda(Prob, Estrategia, Prof_Max, Inc_Prof)
-    escribirSolucion(solucion) #Se escribe la solucion en un archivo .txt
+    solucion,n_final=Busqueda(Prob, Estrategia, Prof_Max, Inc_Prof)
+    escribirSolucion(solucion,n_final) #Se escribe la solucion en un archivo .txt
 
     print("Algoritmo finalizado...")
