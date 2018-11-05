@@ -145,6 +145,8 @@ def busqueda_acotada (prob, estrategia, prof_Max):
 
     while ((solucion == None) and (not(frontera.esVacia()))):
         n_actual=frontera.elimina()
+        if n_actual.getProfundidad() >= int(prof_Max):
+            break
         estadoActual = n_actual.getEstado()
         if prob.esObjetivo(estadoActual):
             solucion=True
@@ -155,7 +157,7 @@ def busqueda_acotada (prob, estrategia, prof_Max):
             frontera.insertarLista(ListaNodosPoda)
 
     if (solucion==None):
-        return "NO_Solucion"
+        return None,None
     else:
         return crearSolucion(n_actual),n_actual
 
@@ -178,6 +180,7 @@ def Busqueda(prob, estrategia, prof_Max, inc_Prof):
 
     while ((solucion == None) and (prof_Actual<= prof_Max)):
         solucion,n_final = busqueda_acotada (prob, estrategia, prof_Actual)
+        print("Incrementamos")
         prof_Actual = prof_Actual + inc_Prof
 
 
@@ -207,6 +210,9 @@ if __name__=="__main__":
     Prob = Problema.Problema ("problema.json")
 
     solucion,n_final=Busqueda(Prob, Estrategia, Prof_Max, Inc_Prof)
-    escribirSolucion(solucion,n_final) #Se escribe la solucion en un archivo .txt
 
-    print("Algoritmo finalizado...")
+    if(solucion is not None):
+        escribirSolucion(solucion,n_final) #Se escribe la solucion en un archivo .txt
+        print("Algoritmo finalizado...")
+    else:
+        print("SIn solucion...")

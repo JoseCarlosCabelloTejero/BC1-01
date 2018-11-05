@@ -60,14 +60,13 @@ class EspacioDeEstados:
 
         for ady in listaDeAdyacentes:
             nombreCalle = ady[2]
-            accM = 'Estoy en {} y voy a {}, {}'.format(estado.getNode(),ady[1],nombreCalle)
             listaNodosNueva = estado.getListNodes()
             for i in estado.getListNodes():
                 if i == ady[1]:
                     listaNodosNueva.remove(ady[1])
             estadoNuevo = Estado(ady[1],listaNodosNueva)
             coste = ady[3]
-
+            accM = 'Estoy en {} y voy a {}, {}, Lista Nodos por recorrer {}'.format(estado.getNode(),ady[1],nombreCalle,listaNodosNueva)
             listaSucesores.append([accM,estadoNuevo,coste])
 
         return listaSucesores
