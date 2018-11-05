@@ -42,4 +42,6 @@ class Estado:
     def getListNodes(self):
         return self.__listNodes
 
+    def getId(self):
+        return self.__id
 ##
