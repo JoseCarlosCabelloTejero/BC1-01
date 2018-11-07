@@ -58,15 +58,21 @@ class EspacioDeEstados:
 
         listaDeAdyacentes = self.__grafo.adyacentesNodo(estado.getNode())
 
+        listaNodosPorRecorrer = estado.getListNodes()
+
         for ady in listaDeAdyacentes:
             nombreCalle = ady[2]
-            listaNodosNueva = estado.getListNodes()
-            for i in estado.getListNodes():
-                if i == ady[1]:
-                    listaNodosNueva.remove(ady[1])
-            estadoNuevo = Estado(ady[1],listaNodosNueva)
+
+            listaNodosNueva = []
+
+            for i in listaNodosPorRecorrer:
+                if not i == ady[1]:
+                    listaNodosNueva.append(i)
+
+            estadoNuevo = Estado(ady[1],sorted(listaNodosNueva))
             coste = ady[3]
-            accM = 'Estoy en {} y voy a {}, {}, Lista Nodos por recorrer {}'.format(estado.getNode(),ady[1],nombreCalle,listaNodosNueva)
+            #accM = 'Estoy en {} y voy a {}, {}, Lista Nodos por recorrer {}'.format(estado.getNode(),ady[1],nombreCalle,listaNodosNueva)
+            accM= '{} --> {} ({}) coste: {}'.format(estado.getNode(),ady[1],nombreCalle,ady[3])
             listaSucesores.append([accM,estadoNuevo,coste])
 
         return listaSucesores

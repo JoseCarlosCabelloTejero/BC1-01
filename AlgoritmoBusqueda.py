@@ -13,6 +13,8 @@ import stack
 
 archivoSolucion="solucion.txt"
 estrategiasBusqueda=["anchura","costo","profundidad","prof_acotada","prof_ite"]
+
+
 ###############################################################################
 #   Nombre del metodo: escribirSolucion
 #   Fecha de creacion: 29/10/2018
@@ -24,14 +26,19 @@ estrategiasBusqueda=["anchura","costo","profundidad","prof_acotada","prof_ite"]
 #
 ################################################################################
 
-def escribirSolucion(solucion,n_final):
+def escribirSolucion(solucion,n_final,estrategia):
+
     with open(archivoSolucion,'w') as f:
-        for accion in solucion:
-            f.write(accion)
-            f.write("\n")
-        cadena = '\nCoste total: {}. \nLista nodos por recorrer {}\n'.format(
-                 n_final.getCosto(),n_final.getEstado().getListNodes())
-        f.write(cadena)
+        f.write("La solucion es: \nEstrategia: {}\n".format(estrategia))
+        f.write("Total de nodos generados: {}\n".format(n_final.getIdNodo()))
+        f.write("Costo: {}\nProfundidad: {}\n\n\n".format(n_final.getCosto(),n_final.getProfundidad()+1))
+
+        for nodo in solucion:
+            if(nodo.getPadre() is None):
+                f.write("None 0.0 0 0.0")
+            else:
+                f.write(nodo.getAccion())
+            f.write("\nEstoy en {} y tengo que visitar:{} \n\n".format(nodo.getEstado().getNode(),nodo.getEstado().getListNodes()))
         f.close()
 
 
@@ -90,10 +97,11 @@ def crearSolucion(nodo):
     nodoArbol = nodo
 
     while (not nodoArbol.getPadre()==None):
-        accion = nodoArbol.getAccion()
-        pila.push(accion)
+        #accion = nodoArbol.getAccion()
+        pila.push(nodoArbol)
         nodoArbol = nodoArbol.getPadre()
 
+    pila.push(nodoArbol)
 
     solucion = []
 
@@ -179,8 +187,8 @@ def Busqueda(prob, estrategia, prof_Max, inc_Prof):
     solucion = None
 
     while ((solucion == None) and (prof_Actual<= prof_Max)):
+        nodosGenerados=0
         solucion,n_final = busqueda_acotada (prob, estrategia, prof_Actual)
-        print("Incrementamos")
         prof_Actual = prof_Actual + inc_Prof
 
 
@@ -212,7 +220,7 @@ if __name__=="__main__":
     solucion,n_final=Busqueda(Prob, Estrategia, Prof_Max, Inc_Prof)
 
     if(solucion is not None):
-        escribirSolucion(solucion,n_final) #Se escribe la solucion en un archivo .txt
+        escribirSolucion(solucion,n_final,Estrategia) #Se escribe la solucion en un archivo .txt
         print("Algoritmo finalizado...")
     else:
         print("SIn solucion...")

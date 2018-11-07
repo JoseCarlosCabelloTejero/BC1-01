@@ -31,6 +31,7 @@ class Nodo:
     def __init__(self,padre,estado,costo,estrategia,accion):
         #Informacion del nodo
         self.__nodoPadre= padre
+
         #Informacion del dominio
         self.__estado= estado
         self.__accion=accion
@@ -38,12 +39,17 @@ class Nodo:
         if self.__nodoPadre == None:
             self.__costo=0
             self.__p=0
+            self.__idNodo=0
         else:
+            self.__idNodo=padre.getIdNodo() + 1
             self.__costo= padre.getCosto() + float(costo)
             self.__p=padre.getProfundidad() + 1
 
         self.__f=self.definirEstrategia(estrategia)
 
+
+    def getIdNodo(self):
+        return self.__idNodo
 
 ## Getter del atributo costo
     def getCosto(self):
