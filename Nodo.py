@@ -39,9 +39,7 @@ class Nodo:
         if self.__nodoPadre == None:
             self.__costo=0
             self.__p=0
-            self.__idNodo=0
         else:
-            self.__idNodo=padre.getIdNodo() + 1
             self.__costo= padre.getCosto() + float(costo)
             self.__p=padre.getProfundidad() + 1
 

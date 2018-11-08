@@ -13,7 +13,7 @@ import stack
 
 archivoSolucion="solucion.txt"
 estrategiasBusqueda=["anchura","costo","profundidad","prof_acotada","prof_ite"]
-
+nodosGenerados = 0
 
 ###############################################################################
 #   Nombre del metodo: escribirSolucion
@@ -30,14 +30,11 @@ def escribirSolucion(solucion,n_final,estrategia):
 
     with open(archivoSolucion,'w') as f:
         f.write("La solucion es: \nEstrategia: {}\n".format(estrategia))
-        f.write("Total de nodos generados: {}\n".format(n_final.getIdNodo()))
+        f.write("Total de nodos generados: {}\n".format(nodosGenerados))
         f.write("Costo: {}\nProfundidad: {}\n\n\n".format(n_final.getCosto(),n_final.getProfundidad()+1))
 
         for nodo in solucion:
-            if(nodo.getPadre() is None):
-                f.write("None 0.0 0 0.0")
-            else:
-                f.write(nodo.getAccion())
+            f.write(nodo.getAccion())
             f.write("\nEstoy en {} y tengo que visitar:{} \n\n".format(nodo.getEstado().getNode(),nodo.getEstado().getListNodes()))
         f.close()
 
@@ -57,6 +54,20 @@ def crea_nodo(padre, estado, prof, costo, estrategia,accion):
     nodo=Nodo.Nodo(padre,estado,costo,estrategia,accion)
     return nodo
 
+###############################################################################
+#   Nombre del metodo: incrementarNodosGlobales
+#   Fecha de creacion: 08/11/2018
+#   Version: 1.0
+#   Argumentos de entrada:
+#   Valor retornado:
+#   Descripcion:
+#
+#
+################################################################################
+
+def incrementarNodosGlobales():
+    global nodosGenerados
+    nodosGenerados = nodosGenerados + 1
 
 ###############################################################################
 #   Nombre del metodo: crearListaNodosArbol
@@ -77,6 +88,7 @@ def crearListaNodosArbol(Ls, padre, prof_Max, estrategia):
         coste=sucesor[2]
         nodo=Nodo.Nodo(padre, estado, coste, estrategia, accion)
         Ln.append(nodo)
+        incrementarNodosGlobales()
     return Ln
 
 
@@ -110,6 +122,16 @@ def crearSolucion(nodo):
 
     return solucion
 
+###############################################################################
+#   Nombre del metodo: poda
+#   Fecha de creacion: 05/11/2018
+#   Version: 1.0
+#   Argumentos de entrada:
+#   Valor retornado:
+#   Descripcion:
+#
+#
+################################################################################
 
 def poda(diccionarioPoda, Ln):
 
@@ -147,7 +169,7 @@ def busqueda_acotada (prob, estrategia, prof_Max):
 
     frontera = Frontera.Frontera()
     estado_inicial = prob.getEstadoInicial()
-    n_inicial = crea_nodo (None, estado_inicial, 0,0, estrategia, None)
+    n_inicial = crea_nodo (None, estado_inicial, 0,0, estrategia, '0.0 0 0.0')
     frontera.insertar(n_inicial)
     solucion = None
 
@@ -187,6 +209,7 @@ def Busqueda(prob, estrategia, prof_Max, inc_Prof):
     solucion = None
 
     while ((solucion == None) and (prof_Actual<= prof_Max)):
+        global nodosGenerados
         nodosGenerados=0
         solucion,n_final = busqueda_acotada (prob, estrategia, prof_Actual)
         prof_Actual = prof_Actual + inc_Prof
