@@ -39,17 +39,19 @@ class EspacioDeEstados:
 
 ###############################################################################
 #   Nombre del metodo: sucesores
-#   Fecha de creacion: 09/10/2018
-#   Version: 1.0
+#   Fecha de creacion: 7/11/2018
+#   Version: 2.0
 #   Argumentos de entrada: un objeto estado
 #   Valor retornado: La lista de los sucesores de ese estado
-#   Descripcion:   Este metodo lo que primero hara es crear una lista con todos
-#                  Los adyacentes del nodo del estado dado. Se recorre esta lista
-#                  de adyacentes y creando una cadena de la forma:
-#                  "Estoy en +nodo_del_estado + y voy a + nodo_adyacente + nombre_calle"
-#                  Ademas crearemos el estado nuevo y calcularemos el coste de llegar
-#                  al nuevo estado. Esto lo metemos en una lista de la forma:
-#                  [accM,estadoNuevo,coste] siendo accM la cadena que hemos creado.
+#   Descripcion:  Partiendo por una lado, de una lista con todos los nodos del grafo 
+#		adyacentes al estado actual, y, por otro lado, de una lsita con los nodos que faltan
+#		por recorrer en el estado actual, vamos a generar una lista de sucesores
+#		para dicho estado.
+#		Recorremos la lista de adyacentes para generar los estados sucesores dicho
+#		estado. Para cada nuevo estado sucesor, le metemos como lista de estados por visitar
+#		aquellos estados adyacentes que no se encuentren la lista de nodos por 
+#		recorrer del estado anterior.
+#		
 ################################################################################
 
     def sucesores(self,estado):
@@ -71,7 +73,6 @@ class EspacioDeEstados:
 
             estadoNuevo = Estado(ady[1],sorted(listaNodosNueva))
             coste = ady[3]
-            #accM = 'Estoy en {} y voy a {}, {}, Lista Nodos por recorrer {}'.format(estado.getNode(),ady[1],nombreCalle,listaNodosNueva)
             accM= '{} --> {} ({}) coste: {}'.format(estado.getNode(),ady[1],nombreCalle,ady[3])
             listaSucesores.append([accM,estadoNuevo,coste])
 
