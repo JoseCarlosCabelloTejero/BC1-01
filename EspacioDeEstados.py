@@ -7,6 +7,7 @@
 import graph
 
 from Estado import *
+import math
 
 class EspacioDeEstados:
 
@@ -38,20 +39,73 @@ class EspacioDeEstados:
         return True
 
 ###############################################################################
+#   Nombre del metodo: calcularHeuristica
+#   Fecha de creacion: 12/11/2018
+#   Version: 1.0
+#   Argumentos de entrada:
+#   Valor retornado:
+#   Descripcion:
+################################################################################
+
+    def calcularHeuristica(self,nodoOSM,listNodes):
+
+        heuristicas = []
+
+        for nodo in listNodes:
+            aux = self.distance(nodoOSM,nodo)
+            heuristicas.append(aux)
+
+        if heuristicas==[]:
+            heuristicas.append(0)
+
+        return min(heuristicas)
+
+###############################################################################
+#   Nombre del metodo: distance
+#   Fecha de creacion: 12/11/2018
+#   Version: 1.0
+#   Argumentos de entrada:
+#   Valor retornado:
+#   Descripcion:
+################################################################################
+
+    def distance(self,idNode1,idNode2):
+
+        (lng1,lat1) = self.__grafo.posicionNodo(idNode1)
+        (lng2,lat2) = self.__grafo.posicionNodo(idNode2)
+        earth_radious=6371009
+
+        phi1 = math.radians(lat1)
+        phi2 = math.radians(lat2)
+        d_phi = phi2 - phi1
+
+        theta1 = math.radians(lng1)
+        theta2 = math.radians(lng2)
+        d_theta = theta2 - theta1
+
+        h = math.sin(d_phi/2)**2 + math.cos(phi1) * math.cos(phi2) * math.sin(d_theta/2)**2
+        h=min(1.0,h)
+
+        arc = 2 * math.asin(math.sqrt(h))
+
+        dist = arc * earth_radious;
+
+        return dist
+###############################################################################
 #   Nombre del metodo: sucesores
 #   Fecha de creacion: 7/11/2018
 #   Version: 2.0
 #   Argumentos de entrada: un objeto estado
 #   Valor retornado: La lista de los sucesores de ese estado
-#   Descripcion:  Partiendo por una lado, de una lista con todos los nodos del grafo 
+#   Descripcion:  Partiendo por una lado, de una lista con todos los nodos del grafo
 #		adyacentes al estado actual, y, por otro lado, de una lsita con los nodos que faltan
 #		por recorrer en el estado actual, vamos a generar una lista de sucesores
 #		para dicho estado.
 #		Recorremos la lista de adyacentes para generar los estados sucesores dicho
 #		estado. Para cada nuevo estado sucesor, le metemos como lista de estados por visitar
-#		aquellos estados adyacentes que no se encuentren la lista de nodos por 
+#		aquellos estados adyacentes que no se encuentren la lista de nodos por
 #		recorrer del estado anterior.
-#		
+#
 ################################################################################
 
     def sucesores(self,estado):
@@ -71,9 +125,11 @@ class EspacioDeEstados:
                 if not i == ady[1]:
                     listaNodosNueva.append(i)
 
-            estadoNuevo = Estado(ady[1],sorted(listaNodosNueva))
+            heuristica=self.calcularHeuristica(ady[1],listaNodosNueva)
+
+            estadoNuevo = Estado(ady[1],sorted(listaNodosNueva),heuristica)
             coste = ady[3]
-            accM= '{} --> {} ({}) coste: {}'.format(estado.getNode(),ady[1],nombreCalle,ady[3])
+            accM= '{} --> {} ({}) coste: {}'.format(estado.getNode(),ady[1],nombreCalle,round(float(ady[3]),2))
             listaSucesores.append([accM,estadoNuevo,coste])
 
         return listaSucesores

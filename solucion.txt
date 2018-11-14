@@ -1,0 +1,115 @@
+La solucion es: 
+Estrategia: anchura
+Total de nodos generados: 7108
+Costo: 10881.47
+Profundidad: 36
+
+
+0.0 0 0.0 F: 0
+Estoy en 4331489739 y tengo que visitar:['4331489528', '4331489668', '4331489711', '4762868815', '4928063625'] 
+
+4331489739 --> 4331489738 (Barrio Nuevo) coste: 48.14 F: 1
+Estoy en 4331489738 y tengo que visitar:['4331489528', '4331489668', '4331489711', '4762868815', '4928063625'] 
+
+4331489738 --> 4331489532 (Barrio Nuevo) coste: 29.92 F: 2
+Estoy en 4331489532 y tengo que visitar:['4331489528', '4331489668', '4331489711', '4762868815', '4928063625'] 
+
+4331489532 --> 946409139 (Sin nombre) coste: 27.51 F: 3
+Estoy en 946409139 y tengo que visitar:['4331489528', '4331489668', '4331489711', '4762868815', '4928063625'] 
+
+946409139 --> 4331489528 (Sin nombre) coste: 32.48 F: 4
+Estoy en 4331489528 y tengo que visitar:['4331489668', '4331489711', '4762868815', '4928063625'] 
+
+4331489528 --> 4331489718 (Calle Arroyo) coste: 34.82 F: 5
+Estoy en 4331489718 y tengo que visitar:['4331489668', '4331489711', '4762868815', '4928063625'] 
+
+4331489718 --> 4331489716 (Calle Arroyo) coste: 42.34 F: 6
+Estoy en 4331489716 y tengo que visitar:['4331489668', '4331489711', '4762868815', '4928063625'] 
+
+4331489716 --> 4331489709 (Plaza España) coste: 17.12 F: 7
+Estoy en 4331489709 y tengo que visitar:['4331489668', '4331489711', '4762868815', '4928063625'] 
+
+4331489709 --> 4331489708 (Calle de la Iglesia) coste: 46.12 F: 8
+Estoy en 4331489708 y tengo que visitar:['4331489668', '4331489711', '4762868815', '4928063625'] 
+
+4331489708 --> 4331489711 (Calle Cervantes) coste: 8.44 F: 9
+Estoy en 4331489711 y tengo que visitar:['4331489668', '4762868815', '4928063625'] 
+
+4331489711 --> 4762868811 (Calle Cervantes) coste: 25.42 F: 10
+Estoy en 4762868811 y tengo que visitar:['4331489668', '4762868815', '4928063625'] 
+
+4762868811 --> 4762868812 (Calle Benemérita) coste: 39.73 F: 11
+Estoy en 4762868812 y tengo que visitar:['4331489668', '4762868815', '4928063625'] 
+
+4762868812 --> 4331489692 (Calle Periodista Antonio Herrero) coste: 88.24 F: 12
+Estoy en 4331489692 y tengo que visitar:['4331489668', '4762868815', '4928063625'] 
+
+4331489692 --> 4331489662 (Calle Periodista Antonio Herrero) coste: 75.84 F: 13
+Estoy en 4331489662 y tengo que visitar:['4331489668', '4762868815', '4928063625'] 
+
+4331489662 --> 4331489668 (Calle Periodista Antonio Herrero) coste: 202.17 F: 14
+Estoy en 4331489668 y tengo que visitar:['4762868815', '4928063625'] 
+
+4331489668 --> 4331489662 (Calle Periodista Antonio Herrero) coste: 202.17 F: 15
+Estoy en 4331489662 y tengo que visitar:['4762868815', '4928063625'] 
+
+4331489662 --> 4331489695 (Calle Gibraltar Español) coste: 62.46 F: 16
+Estoy en 4331489695 y tengo que visitar:['4762868815', '4928063625'] 
+
+4331489695 --> 4331489665 (Calle Gibraltar Español) coste: 4.36 F: 17
+Estoy en 4331489665 y tengo que visitar:['4762868815', '4928063625'] 
+
+4331489665 --> 4331489667 (Calle Gibraltar Español) coste: 24.77 F: 18
+Estoy en 4331489667 y tengo que visitar:['4762868815', '4928063625'] 
+
+4331489667 --> 4331489656 (Calle Gibraltar Español) coste: 83.69 F: 19
+Estoy en 4331489656 y tengo que visitar:['4762868815', '4928063625'] 
+
+4331489656 --> 4331489564 (Calle Gibraltar Español) coste: 84.01 F: 20
+Estoy en 4331489564 y tengo que visitar:['4762868815', '4928063625'] 
+
+4331489564 --> 4331489573 (Calle Carretera) coste: 45.39 F: 21
+Estoy en 4331489573 y tengo que visitar:['4762868815', '4928063625'] 
+
+4331489573 --> 4331489570 (Calle Carretera) coste: 52.7 F: 22
+Estoy en 4331489570 y tengo que visitar:['4762868815', '4928063625'] 
+
+4331489570 --> 4331489627 (Calle Carretera) coste: 22.7 F: 23
+Estoy en 4331489627 y tengo que visitar:['4762868815', '4928063625'] 
+
+4331489627 --> 4331489577 (Calle Carretera) coste: 52.45 F: 24
+Estoy en 4331489577 y tengo que visitar:['4762868815', '4928063625'] 
+
+4331489577 --> 4762868815 (Calle Carretera) coste: 61.3 F: 25
+Estoy en 4762868815 y tengo que visitar:['4928063625'] 
+
+4762868815 --> 4331489577 (Calle Carretera) coste: 61.3 F: 26
+Estoy en 4331489577 y tengo que visitar:['4928063625'] 
+
+4331489577 --> 4331489627 (Calle Carretera) coste: 52.45 F: 27
+Estoy en 4331489627 y tengo que visitar:['4928063625'] 
+
+4331489627 --> 946409159 (Sin nombre) coste: 382.81 F: 28
+Estoy en 946409159 y tengo que visitar:['4928063625'] 
+
+946409159 --> 982621562 (Sin nombre) coste: 104.66 F: 29
+Estoy en 982621562 y tengo que visitar:['4928063625'] 
+
+982621562 --> 4331489516 (Sin nombre) coste: 83.04 F: 30
+Estoy en 4331489516 y tengo que visitar:['4928063625'] 
+
+4331489516 --> 982621804 (Sin nombre) coste: 8030.62 F: 31
+Estoy en 982621804 y tengo que visitar:['4928063625'] 
+
+982621804 --> 4928063639 (Calle Manzanillo) coste: 686.28 F: 32
+Estoy en 4928063639 y tengo que visitar:['4928063625'] 
+
+4928063639 --> 4928063630 (Calle Horcajo) coste: 32.59 F: 33
+Estoy en 4928063630 y tengo que visitar:['4928063625'] 
+
+4928063630 --> 4928063624 (Calle Horcajo) coste: 5.35 F: 34
+Estoy en 4928063624 y tengo que visitar:['4928063625'] 
+
+4928063624 --> 4928063625 (Calle Horcajo) coste: 28.03 F: 35
+Estoy en 4928063625 y tengo que visitar:[] 
+

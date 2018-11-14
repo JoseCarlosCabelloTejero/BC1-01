@@ -14,7 +14,7 @@ import stack
 archivoSolucion="solucion.txt"      #Fichero txt en el que se escribirá la solución.
 archivoJSON= "problema.json"        #fichero json con información del fichero grapml
                                     #de entrada y el estado inicial.
-estrategiasBusqueda=["anchura","costo","profundidad","prof_acotada","prof_ite"]
+estrategiasBusqueda=["anchura","costo","profundidad","prof_acotada","prof_ite","voraz","a*"]
 nodosGenerados = 0
 
 
@@ -45,11 +45,12 @@ def escribirSolucion(solucion,n_final,estrategia):
     with open(archivoSolucion,'w') as f:
         f.write("La solucion es: \nEstrategia: {}\n".format(estrategia))
         f.write("Total de nodos generados: {}\n".format(nodosGenerados))
-        f.write("Costo: {}\n".format(n_final.getCosto()))
+        f.write("Costo: {}\n".format(round(n_final.getCosto(),2)))
         f.write("Profundidad: {}\n\n\n".format(n_final.getProfundidad()+1))
 
         for nodo in solucion:
             f.write(nodo.getAccion())
+            f.write(" F: {}".format(round(nodo.getF(),2)))
             f.write("\nEstoy en {} y tengo que visitar:{} \n\n".format(nodo.getEstado().getNode(),
                 nodo.getEstado().getListNodes()))
         f.close()
@@ -109,7 +110,7 @@ def crearListaNodosArbol(Ls, padre, prof_Max, estrategia):
             accion=sucesor[0]
             estado=sucesor[1]
             coste=sucesor[2]
-            nodo=Nodo.Nodo(padre, estado, coste, estrategia, accion)
+            nodo=crea_nodo(padre,estado,coste,estrategia,accion)
             Ln.append(nodo)
 
             nodosGenerados += 1

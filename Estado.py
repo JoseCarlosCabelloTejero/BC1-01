@@ -5,6 +5,7 @@
 #############################################################################
 
 import hashlib
+import EspacioDeEstados
 
 class Estado:
 
@@ -28,12 +29,15 @@ class Estado:
             n=n+1
         return m.hexdigest()
 
+
+
 #Constructor
 
-    def __init__(self,node,listNodes):
+    def __init__(self,node,listNodes,heuristica):
         self.__node = node
         self.__listNodes = sorted(listNodes)
         self.__id = self.md5generador(self.__node,self.__listNodes)
+        self.__heuristica = heuristica
 
 ## Getter del atributo node
     def getNode(self):
@@ -44,4 +48,7 @@ class Estado:
 
     def getId(self):
         return self.__id
+
+    def getHeuristica(self):
+        return self.__heuristica
 ##

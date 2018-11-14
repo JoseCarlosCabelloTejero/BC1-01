@@ -26,7 +26,7 @@ class Problema:
         data=self.leerJson(ficheroJson)
         self.__espacioEstados=EspacioDeEstados(data.get('graphlmfile'))
         self.__estadoInicial=Estado(data.get('IntSt').get('node'),
-        data.get('IntSt').get('listNodes'))
+        data.get('IntSt').get('listNodes'),self.__espacioEstados.calcularHeuristica(data.get('IntSt').get('node'),data.get('IntSt').get('listNodes')))
 
 ###############################################################################
 #   Nombre del metodo: esObjetivo
@@ -49,5 +49,5 @@ class Problema:
         return self.__espacioEstados
 
     def esObjetivo(self,estado):
-        
+
         return estado.getListNodes() == []

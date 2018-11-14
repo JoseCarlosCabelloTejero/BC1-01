@@ -50,7 +50,7 @@ class Grafo:
             attrX=get_node_attributes(self.__graph,"x")
             attrY=get_node_attributes(self.__graph,"y")
 
-            return [attrX.get(idNodo),attrY.get(idNodo)]
+            return float(attrX.get(idNodo)),float(attrY.get(idNodo))
         else:
             return "Error"
 

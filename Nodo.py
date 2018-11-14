@@ -5,6 +5,7 @@
 #############################################################################
 
 import Estado
+import EspacioDeEstados
 
 class Nodo:
 
@@ -23,10 +24,15 @@ class Nodo:
             f=self.__p
         elif estrategia == "costo":
             f=self.__costo
+        elif estrategia == 'voraz':
+            f=self.__h
+        elif estrategia == 'a*':
+            f=self.__h + self.__costo
         else:
             f=(-1)*self.__p
 
         return f
+
 
     def __init__(self,padre,estado,costo,estrategia,accion):
         #Informacion del nodo
@@ -35,6 +41,11 @@ class Nodo:
         #Informacion del dominio
         self.__estado= estado
         self.__accion=accion
+
+        if estrategia == 'voraz' or estrategia == 'a*':
+            self.__h=estado.getHeuristica()
+        else:
+            self.__h=None
 
         if self.__nodoPadre == None:
             self.__costo=0
