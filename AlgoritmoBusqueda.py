@@ -12,7 +12,7 @@ import sys
 import stack
 
 archivoSolucion="solucion.txt"      #Fichero txt en el que se escribirá la solución.
-archivoJSON= "problema.json"        #fichero json con información del fichero grapml
+archivoJSON= "problema_2.json"        #fichero json con información del fichero grapml
                                     #de entrada y el estado inicial.
 estrategiasBusqueda=["anchura","costo","profundidad","prof_acotada","prof_ite","voraz","a*"]
 nodosGenerados = 0
@@ -187,7 +187,7 @@ def crearSolucion(nodo):
 #                dicho nodo.
 ################################################################################
 
-def poda(diccionarioPoda, Ln):
+def poda(diccionarioPoda, Ln,estrategia):
 
     ListaNodosPoda = []
 
@@ -197,9 +197,14 @@ def poda(diccionarioPoda, Ln):
         F_estado = nodo.getF()
 
         if( idEstado in diccionarioPoda):
-            if F_estado < int(diccionarioPoda.get(idEstado)):
-                diccionarioPoda.update({idEstado:F_estado})
-                ListaNodosPoda.append(nodo)
+            if (estrategia in ["profundidad","prof_ite","prof_acotada"]):
+                if F_estado > int(diccionarioPoda.get(idEstado)):
+                    diccionarioPoda.update({idEstado:F_estado})
+                    ListaNodosPoda.append(nodo)
+            else:
+                if F_estado < int(diccionarioPoda.get(idEstado)):
+                    diccionarioPoda.update({idEstado:F_estado})
+                    ListaNodosPoda.append(nodo)
         else:
             diccionarioPoda.update({idEstado:F_estado})
             ListaNodosPoda.append(nodo)
@@ -250,10 +255,11 @@ def busqueda_acotada (prob, estrategia, prof_Max):
         if prob.esObjetivo(estadoActual):
             solucion=True
         else:
-            Ls=prob.getEspacioEstados().sucesores(n_actual.getEstado())
+            Ls=prob.getEspacioEstados().sucesores(estadoActual)
             Ln=crearListaNodosArbol(Ls, n_actual, prof_Max, estrategia)
-            ListaNodosPoda,diccionarioPoda = poda(diccionarioPoda, Ln)
+            ListaNodosPoda,diccionarioPoda = poda(diccionarioPoda, Ln,estrategia)
             frontera.insertarLista(ListaNodosPoda)
+
 
     if (solucion==None):
         return None,None
@@ -299,6 +305,7 @@ def Busqueda(prob, estrategia, prof_Max, inc_Prof):
         nodosGenerados=0
         solucion,n_final = busqueda_acotada (prob, estrategia, prof_Actual)
         prof_Actual = prof_Actual + inc_Prof
+        print("Siguente iteracion")
 
     return solucion,n_final
 

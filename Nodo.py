@@ -29,7 +29,7 @@ class Nodo:
         elif estrategia == 'a*':
             f=self.__h + self.__costo
         else:
-            f=(-1)*self.__p
+            f=int((-1)*self.__p)
 
         return f
 
