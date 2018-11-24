@@ -13,35 +13,44 @@ import stack
 import gpxpy
 import gpxpy.gpx
 
+#Definición de variables globlales
+archivoSolucion="solucion.txt"     	#Fichero txt en el que se escribirá la solución.
+archivo_gpx="camino.gpx"			#Archivo .gpx con la solución
+archivoJSON= "problema.json"        #fichero json de entrada
 
-archivoSolucion="solucion.txt"     			 #Fichero txt en el que se escribirá la solución.
-archivo_gpx="camino.gpx"					#Archivo .gpx con la solución
-archivoJSON= "problema.json"      #fichero json con información del fichero grapml
-                                    		#de entrada y el estado inicial.
-
-estrategiasBusqueda=["anchura","costo","profundidad","prof_acotada","prof_ite","voraz","a*"]
+estrategiasBusqueda=["anchura","costo","profundidad","prof_acotada","prof_ite",
+                    "voraz","a*"]
 nodosGenerados = 0
 
 
 ###############################################################################
 #   Nombre del metodo: escribirSolucion
 #   Fecha de creacion: 29/10/2018
-#   Version: 1.1
+#   Version: 2.0, modificado el 23/11/2018
 #   Argumentos de entrada:
 #                     -solucion: Lista con la secuencia de acciones que
 #                                componen la solucion al problema
 #                     -n_final:  Nodo objetivo al que se ha llegado. Se utiliza
 #                                para obtener el costo y profundidad de la solución.
-#                     -estrategia: string que indica
+#                     -estrategia: string que indica la estrategia utilizada
+#
+#                     -problema: Necesario para obtener el nodoOSM de cada nodo
+#                                del árbol de búsqueda.
 #
 #   Descripcion: Escribe en un fichero de texto 'solucion.txt' la solución
 #               encontrada al problema definido en el fichero 'problema.json'
-#               Se escribe en el fichero de salida:
+#               Se escribe en el fichero solucion.txt de salida:
 #                    -Estrategia utilizada
 #                    -Profundidad de la Solucion
 #                    -Total de nodos generados
 #                    -Costo del camino que va desde el nodo Inicial al nodo Objetivo
 #                    -Secuencia de nodos que se visitan hasta llegar a la solución
+#
+#               Además, se genera un archivo 'camino.gpx' basado en xml que
+#               describe el recorrido que lleva desde el nodo inicial hasta el
+#               nodo que verifica la función es objetivo. Para ello, nos hemos
+#               guiado de la información contenida en el siguiente repositorio:
+#                           github.com/tkrajina/gpxpy
 #
 ################################################################################
 
@@ -50,7 +59,6 @@ def escribirSolucion(solucion,n_final,estrategia,problema):
     # Create first track in our GPX:
     gpx_track = gpxpy.gpx.GPXTrack()
     gpx.tracks.append(gpx_track)
-
 
     # Create first segment in our GPX track:
     gpx_segment = gpxpy.gpx.GPXTrackSegment()
@@ -63,14 +71,14 @@ def escribirSolucion(solucion,n_final,estrategia,problema):
         f.write("Profundidad: {}\n\n\n".format(n_final.getProfundidad()+1))
 
         for nodo in solucion:
-            nodoOSM=nodo.getEstado().getNode()
+            nodoOSM=nodo.getEstado().getNodeOSM()
             posicionOSM=problema.getEspacioEstados().getGrafo().posicionNodo(nodoOSM)
-
+            #posicionOSM=(longitud,latitud)
             gpx_segment.points.append(gpxpy.gpx.GPXTrackPoint(posicionOSM[1], posicionOSM[0]))
-            
+
             f.write(nodo.getAccion())
             f.write(" F: {}".format(round(nodo.getF(),2)))
-            f.write("\nEstoy en {} y tengo que visitar:{} \n\n".format(nodo.getEstado().getNode(),
+            f.write("\nEstoy en {} y tengo que visitar:{} \n\n".format(nodo.getEstado().getNodeOSM(),
                 nodo.getEstado().getListNodes()))
         f.close()
 
