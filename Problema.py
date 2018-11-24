@@ -25,8 +25,13 @@ class Problema:
     def __init__(self,ficheroJson):
         data=self.leerJson(ficheroJson)
         self.__espacioEstados=EspacioDeEstados(data.get('graphlmfile'))
-        self.__estadoInicial=Estado(data.get('IntSt').get('node'),
-        data.get('IntSt').get('listNodes'),self.__espacioEstados.calcularHeuristica(data.get('IntSt').get('node'),data.get('IntSt').get('listNodes')))
+
+        #Definicion del EstadoInicial
+        OSM_inicial=data.get('IntSt').get('node')
+        listNodes_inicial=data.get('IntSt').get('listNodes')
+        heuristica=self.__espacioEstados.calcularHeuristica(OSM_inicial,listNodes_inicial)
+        self.__estadoInicial=Estado(OSM_inicial,listNodes_inicial,heuristica)
+
 
 ###############################################################################
 #   Nombre del metodo: esObjetivo
