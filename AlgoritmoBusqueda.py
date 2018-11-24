@@ -10,10 +10,15 @@ import Frontera
 import Nodo
 import sys
 import stack
+import gpxpy
+import gpxpy.gpx
 
-archivoSolucion="solucion.txt"      #Fichero txt en el que se escribirá la solución.
-archivoJSON= "problema_2.json"        #fichero json con información del fichero grapml
-                                    #de entrada y el estado inicial.
+
+archivoSolucion="solucion.txt"     			 #Fichero txt en el que se escribirá la solución.
+archivo_gpx="camino.gpx"					#Archivo .gpx con la solución
+archivoJSON= "problema.json"      #fichero json con información del fichero grapml
+                                    		#de entrada y el estado inicial.
+
 estrategiasBusqueda=["anchura","costo","profundidad","prof_acotada","prof_ite","voraz","a*"]
 nodosGenerados = 0
 
@@ -40,7 +45,16 @@ nodosGenerados = 0
 #
 ################################################################################
 
-def escribirSolucion(solucion,n_final,estrategia):
+def escribirSolucion(solucion,n_final,estrategia,problema):
+    gpx = gpxpy.gpx.GPX()
+    # Create first track in our GPX:
+    gpx_track = gpxpy.gpx.GPXTrack()
+    gpx.tracks.append(gpx_track)
+
+
+    # Create first segment in our GPX track:
+    gpx_segment = gpxpy.gpx.GPXTrackSegment()
+    gpx_track.segments.append(gpx_segment)
 
     with open(archivoSolucion,'w') as f:
         f.write("La solucion es: \nEstrategia: {}\n".format(estrategia))
@@ -49,10 +63,19 @@ def escribirSolucion(solucion,n_final,estrategia):
         f.write("Profundidad: {}\n\n\n".format(n_final.getProfundidad()+1))
 
         for nodo in solucion:
+            nodoOSM=nodo.getEstado().getNode()
+            posicionOSM=problema.getEspacioEstados().getGrafo().posicionNodo(nodoOSM)
+
+            gpx_segment.points.append(gpxpy.gpx.GPXTrackPoint(posicionOSM[1], posicionOSM[0]))
+            
             f.write(nodo.getAccion())
             f.write(" F: {}".format(round(nodo.getF(),2)))
             f.write("\nEstoy en {} y tengo que visitar:{} \n\n".format(nodo.getEstado().getNode(),
                 nodo.getEstado().getListNodes()))
+        f.close()
+
+    with open(archivo_gpx,'w') as f:
+        f.write(gpx.to_xml())
         f.close()
 
 
@@ -305,7 +328,7 @@ def Busqueda(prob, estrategia, prof_Max, inc_Prof):
         nodosGenerados=0
         solucion,n_final = busqueda_acotada (prob, estrategia, prof_Actual)
         prof_Actual = prof_Actual + inc_Prof
-        print("Siguente iteracion")
+
 
     return solucion,n_final
 
@@ -335,7 +358,7 @@ if __name__=="__main__":
     solucion,n_final=Busqueda(Prob, Estrategia, Prof_Max, Inc_Prof)
 
     if(solucion is not None):
-        escribirSolucion(solucion,n_final,Estrategia) #Se escribe la solucion en un archivo .txt
+        escribirSolucion(solucion,n_final,Estrategia,Prob) #Se escribe la solucion en un archivo .txt
         print("Algoritmo finalizado...")
     else:
         print("Sin solucion...")
