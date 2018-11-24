@@ -33,15 +33,15 @@ class Estado:
 
 #Constructor
 
-    def __init__(self,node,listNodes,heuristica):
-        self.__node = node
+    def __init__(self,nodeOSM,listNodes,heuristica):
+        self.__nodeOSM = nodeOSM
         self.__listNodes = sorted(listNodes)
-        self.__id = self.md5generador(self.__node,self.__listNodes)
+        self.__id = self.md5generador(self.__nodeOSM,self.__listNodes)
         self.__heuristica = heuristica
 
 ## Getter del atributo node
-    def getNode(self):
-        return self.__node
+    def getNodeOSM(self):
+        return self.__nodeOSM
 
     def getListNodes(self):
         return self.__listNodes
@@ -51,4 +51,3 @@ class Estado:
 
     def getHeuristica(self):
         return self.__heuristica
-##
