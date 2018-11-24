@@ -14,6 +14,9 @@ class EspacioDeEstados:
     def __init__(self,fichero):
         self.__grafo=graph.Grafo(fichero)
 
+    def getGrafo(self):
+        return self.__grafo
+
 ###############################################################################
 #   Nombre del metodo: esta
 #   Fecha de creacion: 09/10/2018
