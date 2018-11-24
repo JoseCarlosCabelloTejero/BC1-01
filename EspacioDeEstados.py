@@ -45,9 +45,12 @@ class EspacioDeEstados:
 #   Nombre del metodo: calcularHeuristica
 #   Fecha de creacion: 12/11/2018
 #   Version: 1.0
-#   Argumentos de entrada:
-#   Valor retornado:
-#   Descripcion:
+#   Argumentos de entrada: nodoOSM y lista de nodos por recorrer desde ese Nodo
+#   Valor retornado: Mínima distancia desde nodoOSM hasta cualquiera de los
+#                      nodos contenidos en 'listNodes'
+#   Descripcion: Se calcula la distancia geógrafica desde nodoOSM hasta a cada uno
+#                  de los nodos de ListNodes. De todas estas distancias se retorna
+#                  la más pequeña.
 ################################################################################
 
     def calcularHeuristica(self,nodoOSM,listNodes):
@@ -67,9 +70,10 @@ class EspacioDeEstados:
 #   Nombre del metodo: distance
 #   Fecha de creacion: 12/11/2018
 #   Version: 1.0
-#   Argumentos de entrada:
-#   Valor retornado:
-#   Descripcion:
+#   Argumentos de entrada:Nodos OSM entre los cuales se desea calcular la distancia
+#                        existente
+#   Valor retornado:  Distancia geográfica entre dos nodos OSM
+#   Descripcion: Retorna la
 ################################################################################
 
     def distance(self,idNode1,idNode2):
@@ -115,7 +119,7 @@ class EspacioDeEstados:
 
         listaSucesores = []
 
-        listaDeAdyacentes = self.__grafo.adyacentesNodo(estado.getNode())
+        listaDeAdyacentes = self.__grafo.adyacentesNodo(estado.getNodeOSM())
 
         listaNodosPorRecorrer = estado.getListNodes()
 
@@ -132,7 +136,7 @@ class EspacioDeEstados:
 
             estadoNuevo = Estado(ady[1],sorted(listaNodosNueva),heuristica)
             coste = ady[3]
-            accM= '{} --> {} ({}) coste: {}'.format(estado.getNode(),ady[1],nombreCalle,round(float(ady[3]),2))
+            accM= '{} --> {} ({}) coste: {}'.format(estado.getNodeOSM(),ady[1],nombreCalle,round(float(ady[3]),2))
             listaSucesores.append([accM,estadoNuevo,coste])
 
         return listaSucesores
