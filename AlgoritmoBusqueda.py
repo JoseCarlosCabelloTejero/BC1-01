@@ -4,19 +4,19 @@
 ##    Grupo: BC1 - 01                       Curso: 2018 / 2019             ##
 #############################################################################
 
-import EspacioDeEstados
+import sys
+import gpxpy
+import gpxpy.gpx
 import Problema
 import Frontera
 import Nodo
-import sys
 import stack
-import gpxpy
-import gpxpy.gpx
+
+
 
 #Definición de variables globlales
 archivoSolucion="solucion.txt"     	#Fichero txt en el que se escribirá la solución.
 archivo_gpx="camino.gpx"			#Archivo .gpx con la solución
-archivoJSON= "problema.json"        #fichero json de entrada
 
 estrategiasBusqueda=["anchura","costo","profundidad","prof_acotada","prof_ite",
                     "voraz","a*"]
@@ -99,7 +99,7 @@ def escribirSolucion(solucion,n_final,estrategia,problema):
 #
 ################################################################################
 
-def crea_nodo(padre, estado, costo, estrategia,accion):
+def crea_nodo(padre, estado, costo, estrategia, accion):
     nodo=Nodo.Nodo(padre,estado,costo,estrategia,accion)
     return nodo
 
@@ -348,8 +348,9 @@ def Busqueda(prob, estrategia, prof_Max, inc_Prof):
 if __name__=="__main__":
 
     #Comprobacion de los argumentos de entrada
-    if not len(sys.argv)==4:
-        print('Uso: ./AlgoritmoBusqueda <profMaxima> <incremento> <estrategia>')
+    if not len(sys.argv)==5:
+        print('Uso: ./AlgoritmoBusqueda <profMaxima> <incremento> <estrategia>'
+                ' <problema.json>')
         exit()
     elif (sys.argv[3].lower()) not in estrategiasBusqueda:
         print('Error. Estrategia de búsqueda desconocida')
@@ -360,8 +361,7 @@ if __name__=="__main__":
     Prof_Max = int (sys.argv[1])
     Inc_Prof= int(sys.argv[2])
     Estrategia=(sys.argv[3]).lower()
-
-    Prob = Problema.Problema (archivoJSON)
+    Prob = Problema.Problema (sys.argv[4])
 
     solucion,n_final=Busqueda(Prob, Estrategia, Prof_Max, Inc_Prof)
 
