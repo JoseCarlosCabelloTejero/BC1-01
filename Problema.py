@@ -1,4 +1,5 @@
 import json
+from sys import exit
 from EspacioDeEstados import EspacioDeEstados
 from Estado import Estado
 
@@ -16,15 +17,26 @@ class Problema:
 ################################################################################
 
     def leerJson(self,ficheroJson):
-        jsondata=open(ficheroJson).read()
-        data=json.loads(jsondata) #devuelve diccionario con los campos del json
+        try:
+            jsondata=open(ficheroJson).read()
+            data=json.loads(jsondata) #devuelve diccionario con los campos del json
+            return data
+        except FileNotFoundError:
+            print("Error. Archivo '{0}' no encontrado".format(ficheroJson))
+            exit()
 
-        return data
 
 
     def __init__(self,ficheroJson):
         data=self.leerJson(ficheroJson)
-        self.__espacioEstados=EspacioDeEstados(data.get('graphlmfile'))
+        ficheroGraphml=data.get('graphlmfile')
+
+        #Si el archivo graphml indicado en el archivo json no tiene extensión
+        # xml se la añadimos
+        if not ((ficheroGraphml[len(ficheroGraphml)-3:]) == 'xml'):
+            ficheroGraphml+='.xml'
+
+        self.__espacioEstados=EspacioDeEstados(ficheroGraphml)
 
         #Definicion del EstadoInicial
         OSM_inicial=data.get('IntSt').get('node')
