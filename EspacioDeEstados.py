@@ -11,8 +11,8 @@ import math
 
 class EspacioDeEstados:
 
-    def __init__(self,fichero):
-        self.__grafo=graph.Grafo(fichero)
+    def __init__(self, ficheroGraphml):
+        self.__grafo = graph.Grafo(ficheroGraphml)
 
     def getGrafo(self):
         return self.__grafo
@@ -32,7 +32,7 @@ class EspacioDeEstados:
 #                  true, si no es asi devolveremos false.
 ################################################################################
 
-    def esta(self,estado):
+    def esta(self, estado):
         if not (self.__grafo.perteneceNodo(estado.getNode())):
             return False
         else:
@@ -53,7 +53,7 @@ class EspacioDeEstados:
 #                  la más pequeña.
 ################################################################################
 
-    def calcularHeuristica(self,nodoOSM,listNodes):
+    def calcularHeuristica(self, nodoOSM, listNodes):
 
         heuristicas = []
 
@@ -76,7 +76,7 @@ class EspacioDeEstados:
 #   Descripcion: Retorna la
 ################################################################################
 
-    def distance(self,idNode1,idNode2):
+    def distance(self, idNode1, idNode2):
 
         (lng1,lat1) = self.__grafo.posicionNodo(idNode1)
         (lng2,lat2) = self.__grafo.posicionNodo(idNode2)
@@ -115,7 +115,7 @@ class EspacioDeEstados:
 #
 ################################################################################
 
-    def sucesores(self,estado):
+    def sucesores(self, estado):
 
         listaSucesores = []
 
