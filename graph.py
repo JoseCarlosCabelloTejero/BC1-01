@@ -7,7 +7,11 @@ from networkx import *
 
 class Grafo:
     def __init__(self,path): #Constructor
-        self.__graph = read_graphml(path)
+        try:
+            self.__graph = read_graphml(path)
+        except FileNotFoundError:
+            print("Error. Archivo '{0}' no encontrado".format(path))
+            exit()
 
 # Metodo que devuelve el atributo graph
     def getGraph(self):
