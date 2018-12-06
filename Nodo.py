@@ -5,7 +5,7 @@
 #############################################################################
 
 import Estado
-import EspacioDeEstados
+
 
 class Nodo:
 

@@ -5,7 +5,7 @@
 #############################################################################
 
 import hashlib
-import EspacioDeEstados
+
 
 class Estado:
 
