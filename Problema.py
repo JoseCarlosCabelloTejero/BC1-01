@@ -45,6 +45,12 @@ class Problema:
         self.__estadoInicial=Estado(OSM_inicial,listNodes_inicial,heuristica)
 
 
+    def getEstadoInicial(self):
+        return self.__estadoInicial
+
+    def getEspacioEstados(self):
+        return self.__espacioEstados
+
 ###############################################################################
 #   Nombre del metodo: esObjetivo
 #   Fecha de creacion: 17/10/2018
@@ -57,14 +63,6 @@ class Problema:
 #                  Si esta vacia devolvemos True ya que el nodo es obejtivo, si no
 #                  lo esta devolveremos False
 ################################################################################
-
-
-    def getEstadoInicial(self):
-        return self.__estadoInicial
-
-    def getEspacioEstados(self):
-        return self.__espacioEstados
-
     def esObjetivo(self,estado):
 
         return estado.getListNodes() == []
