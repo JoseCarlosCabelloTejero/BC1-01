@@ -9,6 +9,9 @@ class Grafo:
     def __init__(self,path): #Constructor
         try:
             self.__graph = read_graphml(path)
+            self.__listaNodos = self.__graph.nodes
+            self.__attrX = get_node_attributes(self.__graph,"x")
+            self.__attrY = get_node_attributes(self.__graph,"y")
         except FileNotFoundError:
             print("Error. Archivo '{0}' no encontrado".format(path))
             exit()
@@ -32,10 +35,12 @@ class Grafo:
 ################################################################################
 
     def perteneceNodo(self, idNodo):
-        listaNodos=list(self.__graph.nodes)
-        for i in listaNodos:
-            if idNodo==i:
-                return True
+        #listaNodos=list(self.__graph.nodes)
+    #    for i in listaNodos:
+        #    if idNodo==i:
+            #    return True
+        if idNodo in self.__listaNodos:
+            return True
         return False
 
 ###############################################################################
@@ -51,10 +56,7 @@ class Grafo:
 ################################################################################
     def posicionNodo(self, idNodo):
         if  self.perteneceNodo(idNodo) == True:
-            attrX=get_node_attributes(self.__graph,"x")
-            attrY=get_node_attributes(self.__graph,"y")
-
-            return float(attrX.get(idNodo)),float(attrY.get(idNodo))
+            return float(self.__attrX.get(idNodo)),float(self.__attrY.get(idNodo))
         else:
             return "Error"
 
